@@ -63,7 +63,7 @@ class Apriori:
 
             rules.append(rule)
 
-        return self.order_by_confidence(rules,5)
+        return self.order_by_confidence(rules,2)
 
         
 
