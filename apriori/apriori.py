@@ -47,7 +47,7 @@ class Apriori:
 
         return confidence
 
-    def run_analysis_on_data_set(self) -> list:
+    def run_analysis_on_data_set(self,min_support = None,min_confidence = None, results_quantity: int = 2) -> list:
         
         rules = list()
         for index, row in self.transactions.iterrows():
@@ -61,16 +61,29 @@ class Apriori:
                 "confidence":confidence
             }
 
-            rules.append(rule)
+            if self._control_by_support_and_confidence(rule,min_support, min_confidence):
+                rules.append(rule)
 
-        return self.order_by_confidence(rules,2)
+        return self._order_by_confidence(rules,results_quantity)
 
         
 
-    def order_by_confidence(self,rules: list, max_results:int = 2) -> list:
+    def _order_by_confidence(self,rules: list, max_results:int) -> list:
 
         result_with_no_duplicates = list()
         result_sort = sorted(rules,key=lambda x:x['confidence'])
         [result_with_no_duplicates.append(x) for x in result_sort if x not in result_with_no_duplicates]
 
         return result_with_no_duplicates[- max_results:]
+
+    def _control_by_support_and_confidence(self,rule: dict, min_support: float, min_confidence: float) -> bool:
+
+        if min_support and min_confidence:
+
+            if rule.get('support') >= min_support and rule.get('confidence') >= min_confidence:
+
+                return True
+            
+            return False
+
+        return True
