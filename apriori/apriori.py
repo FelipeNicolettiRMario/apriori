@@ -36,7 +36,7 @@ class Apriori:
 
         items_popularity_initial_order = len(self.transactions.query(f'(Item_x == "{x}" and Item_y == "{y}")'))
         items_popularity_alternative_order = len(self.transactions.query(f'(Item_x == "{y}" and Item_y == "{x}")'))
-        support = (items_popularity_alternative_order + items_popularity_initial_order )/ len(self.items)
+        support = (items_popularity_alternative_order + items_popularity_initial_order )/ len(set(self.items))
         
         return support
 
