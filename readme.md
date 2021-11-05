@@ -33,6 +33,3 @@ Para a execução do programa basta rodar o seguinte comando:
 ```python explore-data.py```
 
 Três indicadores serão gerados no matplotlib, após isso será mostrado as duas regras de associação mais fortes da base.
-
-## Para executar a aplicação
-```python run.py```
