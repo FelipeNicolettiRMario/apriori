@@ -71,7 +71,7 @@ class Apriori:
     def _order_by_confidence(self,rules: list, max_results:int) -> list:
 
         result_with_no_duplicates = list()
-        result_sort = sorted(rules,key=lambda x:x['confidence'])
+        result_sort = sorted(rules,key=lambda x:(x['confidence'],x['support']))
         [result_with_no_duplicates.append(x) for x in result_sort if x not in result_with_no_duplicates]
 
         return result_with_no_duplicates[- max_results:]
